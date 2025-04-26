@@ -1,0 +1,28 @@
+{
+    "Follow up Questions": {
+        "İlacınızı aldınız mı?":{
+            "yes":{
+                "İyileştiniz mi?":{
+                    "yes":{
+                        "Select your satisfaction level (1-5):":{
+                            "1":"Teşekkürler! Geçmiş olsun.",
+                            "2":"Teşekkürler! Geçmiş olsun.",
+                            "3":"Teşekkürler! Geçmiş olsun.",
+                            "4":"Teşekkürler! Geçmiş olsun.",
+                            "5":"Teşekkürler! Geçmiş olsun."
+                        }
+                    },
+                    "no":{
+                        "Select your satisfaction level (1-5):": {
+                            "1": "Geçmiş olsun! Doktorunuza danışabilirsiniz.",
+                            "2": "Geçmiş olsun! Doktorunuza danışabilirsiniz.",
+                            "3": "Geçmiş olsun! Doktorunuza danışabilirsiniz.",
+                            "4": "Geçmiş olsun! Doktorunuza danışabilirsiniz.",
+                            "5": "Geçmiş olsun! Doktorunuza danışabilirsiniz."
+                        }
+                    }
+                }
+            },"no":"Lütfen ilaçlarınızı alınız."
+        }
+    }
+}
