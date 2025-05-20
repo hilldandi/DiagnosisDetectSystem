@@ -135,7 +135,7 @@ class DiagnosisScene(QWidget):
             return
         
         healed= self.history_table.item(selected_row, 3).text()
-        if healed == "No":
+        if healed.lower() == "no" or (healed == None or healed ==""):
             # Eğer hasta iyileşmediyse takip diyalogunu aç
             with open(c.FollowUp_Path, "r", encoding="utf-8") as file:
                 followup_data = json.load(file)
@@ -259,12 +259,15 @@ class DiagnosisScene(QWidget):
         # final teşhise uygun bir ilaç varsa onu çekiyoruz (service > medicine_service.py > get_medicine())
         medicine = ms.get_medicine(final_diagnosis) if final_diagnosis else ""
         # henüz iyileşmediği için noyazıp memnuniyet puanını 0 giriyoruz
-        are_you_healed = "No"
-        satisfaction_level = 0
+        are_you_healed = None
+        satisfaction_level = None
 
         # db'ye yeni teşhis kaydı ekliyoruz
         pt_ser.create_patient_record(protocol_number,doctor_id,patient_name,tc_no,qa_str,final_diagnosis,are_you_healed,medicine,satisfaction_level)
         
+        # kullanıcının teşhis sayısını 1 artır
+        pt_ser.update_number_of_diagnoses(tc_no)
+
         # teşhisin eklendiğiyle ilgili uyarı ekranı gösteriyoruz
         QMessageBox.information(self, f"Teşhis: {final_diagnosis}", f"Teşhis başarıyla kaydedildi. Protokol Numarası: {protocol_number}.")
         # hasta geçmiş tablosunu yeniliyoruz

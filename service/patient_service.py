@@ -4,18 +4,28 @@ import config as c
 
 from service.db_setup import query_executer
 
-# Teşhis sayısını hastanın kaydına güncelleyen fonksiyon
-def update_number_of_diagnoses(tc_no):
+# Hastanin teşhis sayısını getiren fonksiyon
+def get_number_of_diagnoses(tc_no):
     # Hastanın toplam teşhis sayısını öğreniyoruz
     count_result = query_executer("SELECT COUNT(*) FROM diagnoses WHERE tc_no = ?", (tc_no,))
     count = count_result[0] if count_result else 0
+    return count
+
+# Teşhis sayısını hastanın kaydına güncelleyen fonksiyon
+def update_number_of_diagnoses(tc_no):
+    # Hastanın toplam teşhis sayısını öğreniyoruz
+    count = int(get_number_of_diagnoses(tc_no))
 
     # Bu sayıyı hastalar tablosunda güncelliyoruz
-    query_executer("""
+    conn = sqlite3.connect(c.DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("""
         UPDATE patients
         SET number_of_diagnoses = ?
         WHERE tc_no = ?
     """, (count, tc_no))
+    conn.commit()
+    conn.close()
 
 
 # Belirli bir doktora ait tüm hastaları getiren fonksiyon
@@ -61,6 +71,7 @@ def create_patient_record(protocol_number,doctor_id, patient_name, tc_no, questi
             VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?)
         ''', (date,protocol_number,doctor_id, patient_name, tc_no, questions_and_answers_str, final_diagnosis, medicine, are_you_healed, satisfaction))
         conn.commit()
+        conn.close()
         print("Kayıt başarıyla eklendi.")
     except sqlite3.Error as e:
         print("SQLite hatası (create):", e)

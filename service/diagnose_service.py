@@ -26,11 +26,14 @@ def get_diagnoses(tc_no,doctor_id):
 # teşhis güncelleme fonksiyonu
 def update_diagnose(healed, satisfaction, protocol_number):
     try:
-        query_executer("""
+        conn = sqlite3.connect(c.DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("""
             UPDATE diagnoses
             SET are_you_healed = ?, satisfaction_level = ?
             WHERE protocol_number = ?
         """, (healed, satisfaction, protocol_number))
+        conn.commit()
         return "Değerlendirme başarıyla kaydedildi."
     except Exception as e:
         return f"Veritabanı hatası: {str(e)}"

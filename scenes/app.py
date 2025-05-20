@@ -90,6 +90,8 @@ class DiagnosisApp(QMainWindow):
     
     # Admin panel sahnesine/sayfasına geçiş fonksiyonu
     def switch_to_admin_panel_scene(self):
+        self.admin_panel_scene.create_grafik_tab()
+        self.admin_panel_scene.update_oran_tab()
         self.stacked_widget.setCurrentWidget(self.admin_panel_scene) # admin panel ekranını göster
 
     # Home sahnesine/sayfasına geçiş fonksiyonu

@@ -109,10 +109,11 @@ class FollowUpDialog(QDialog):
 
     def handle_answer(self, answer):
         """Evet/Hayır cevabına göre yönlendirme yapar ve gerekli verileri toplar."""
-        if self.current_question == "Did you take the medicine?":
+
+        if self.current_question == "Did you take the medicine?" or self.current_question == "İlacınızı aldınız mı?":
             self.did_you_take_medicine = answer
 
-        elif self.current_question == "Are you healed":
+        elif self.current_question == "Are you healed" or self.current_question == "İyileştiniz mi?":
             self.are_you_healed = answer
 
         # sonraki soruya geç

@@ -13,6 +13,7 @@ def get_doctor_review_stats():
                SUM(CASE WHEN LOWER(r.are_you_healed) = 'no' THEN 1 ELSE 0 END) as iyilesmeyen
         FROM doctors d
         LEFT JOIN diagnoses r ON d.doctor_id = r.doctor_id
+        WHERE r.satisfaction_level IS NOT NULL
         GROUP BY d.doctor_id
     """)
 

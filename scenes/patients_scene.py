@@ -215,7 +215,7 @@ class LoginScene(QWidget):
         # her hasta için
         for p in patients:
             tc_no = p[0] # tc_no bilgisini al
-            pt_ser.update_number_of_diagnoses(tc_no) # bu tc_no ile sorgu atarak, hastaya ait teşhis sayılarını getir
+            pt_ser.get_number_of_diagnoses(tc_no) # bu tc_no ile sorgu atarak, hastaya ait teşhis sayılarını getir
 
         # giriş yapan doktorlara ait hastaların GÜNCEL HALİNİ çek (patient_service.py > get_all_patinet())
         # çünkü her biri için ayrı fonksiyon çalıştırdık

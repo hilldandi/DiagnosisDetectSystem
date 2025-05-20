@@ -71,9 +71,34 @@ WHERE NOT EXISTS (
 );
 
 INSERT INTO doctors (doctor_id, doctor_name, doctor_password,doctor_gender,doctor_age)
-SELECT 123456789,'Ezgi Erkat','123','Female','23'
+SELECT 123456789,'Duygu Söğütdallı','123','Female','23'
 WHERE NOT EXISTS (
     SELECT 1 FROM doctors WHERE doctor_id ='0123456789' -- eğer 0123456789 id'li bi doktor yoksa bu id ile oluştur, Şifre=123 
+);
+INSERT INTO doctors (doctor_id, doctor_name, doctor_password,doctor_gender,doctor_age)
+SELECT 1234567,'Ahmet Sermet Anagün','123','Female','23'
+WHERE NOT EXISTS (
+    SELECT 1 FROM doctors WHERE doctor_id = '1234567' -- eğer 123456 id'li bi doktor yoksa bu id ile oluştur, Şifre=123 
+);
+INSERT INTO doctors (doctor_id, doctor_name, doctor_password,doctor_gender,doctor_age)
+SELECT 12345678,'İlker Korkmaz','123','Female','23'
+WHERE NOT EXISTS (
+    SELECT 1 FROM doctors WHERE doctor_id = '12345678' -- eğer 123456 id'li bi doktor yoksa bu id ile oluştur, Şifre=123 
+);
+INSERT INTO doctors (doctor_id, doctor_name, doctor_password,doctor_gender,doctor_age)
+SELECT 12345678912,'Oğuz Soylu','123','Female','23'
+WHERE NOT EXISTS (
+    SELECT 1 FROM doctors WHERE doctor_id = '12345678912' -- eğer 123456 id'li bi doktor yoksa bu id ile oluştur, Şifre=123 
+);
+INSERT INTO doctors (doctor_id, doctor_name, doctor_password,doctor_gender,doctor_age)
+SELECT 666666,'Kaan Soylu','123','Female','23'
+WHERE NOT EXISTS (
+    SELECT 1 FROM doctors WHERE doctor_id = '666666' -- eğer 123456 id'li bi doktor yoksa bu id ile oluştur, Şifre=123 
+);
+INSERT INTO doctors (doctor_id, doctor_name, doctor_password,doctor_gender,doctor_age)
+SELECT 77777,'Zeynep Gümüş','123','Female','23'
+WHERE NOT EXISTS (
+    SELECT 1 FROM doctors WHERE doctor_id = '77777' -- eğer 123456 id'li bi doktor yoksa bu id ile oluştur, Şifre=123 
 );
 
 
@@ -101,15 +126,15 @@ Diğer Nedenler Araştırılmalı                    => Doktor değerlendirmesi 
 */
 
 INSERT INTO diagnose_medicine (diagnose, medicine)
-SELECT 'Migren', 'Sumatriptan'
+SELECT 'Migren', 'Sumatriptan,Rizatriptan,Ergotamin (daha eski tip ilaçlarda),Naproksen (atağa destek amaçlı)'
 WHERE NOT EXISTS (
-    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Migren' AND medicine = 'Sumatriptan'
+    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Migren' AND medicine = 'Sumatriptan,Rizatriptan,Ergotamin (daha eski tip ilaçlarda),Naproksen (atağa destek amaçlı)'
 );
 
 INSERT INTO diagnose_medicine (diagnose, medicine)
-SELECT 'Tansiyon tipi baş ağrısı', 'Parasetamol'
+SELECT 'Tansiyon tipi baş ağrısı', 'Parasetamol (Paracetamol),Ibuprofen,Naproksen'
 WHERE NOT EXISTS (
-    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Tansiyon tipi baş ağrısı' AND medicine = 'Parasetamol'
+    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Tansiyon tipi baş ağrısı' AND medicine = 'Parasetamol (Paracetamol),Ibuprofen,Naproksen'
 );
 
 INSERT INTO diagnose_medicine (diagnose, medicine)
@@ -119,15 +144,15 @@ WHERE NOT EXISTS (
 );
 
 INSERT INTO diagnose_medicine (diagnose, medicine)
-SELECT 'COVID-19 Olabilir', 'Favipiravir'
+SELECT 'COVID-19 Olabilir', 'Antiviral ilaçlar bazı durumlarda: Nirmatrelvir + Ritonavir (Paxlovid içerikleri)\nSemptomatik tedavi:Parasetamol (ateş için), Ibuprofen (semptom kontrolü için)'
 WHERE NOT EXISTS (
-    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'COVID-19 Olabilir' AND medicine = 'Favipiravir'
+    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'COVID-19 Olabilir' AND medicine = 'Antiviral ilaçlar bazı durumlarda: Nirmatrelvir + Ritonavir (Paxlovid içerikleri)\nSemptomatik tedavi:Parasetamol (ateş için), Ibuprofen (semptom kontrolü için)'
 );
 
 INSERT INTO diagnose_medicine (diagnose, medicine)
-SELECT 'Soğuk Algınlığı veya Grip', 'Parasetamol'
+SELECT 'Soğuk Algınlığı veya Grip', 'Parasetamol (ateş ve ağrı için),Ibuprofen,Pseudoefedrin (burun tıkanıklığı için),Dekstrometorfan (öksürük için)'
 WHERE NOT EXISTS (
-    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Soğuk Algınlığı veya Grip' AND medicine = 'Parasetamol'
+    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Soğuk Algınlığı veya Grip' AND medicine = 'Parasetamol (ateş ve ağrı için),Ibuprofen,Pseudoefedrin (burun tıkanıklığı için),Dekstrometorfan (öksürük için)'
 );
 
 INSERT INTO diagnose_medicine (diagnose, medicine)
@@ -161,9 +186,9 @@ WHERE NOT EXISTS (
 );
 
 INSERT INTO diagnose_medicine (diagnose, medicine)
-SELECT 'Grip Olabilir.', 'Oseltamivir'
+SELECT 'Grip Olabilir.', 'Oseltamivir (antiviral, ağır vakalarda),Parasetamol,Ibuprofen'
 WHERE NOT EXISTS (
-    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Grip Olabilir.' AND medicine = 'Oseltamivir'
+    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Grip Olabilir.' AND medicine = 'Oseltamivir (antiviral, ağır vakalarda),Parasetamol,Ibuprofen'
 );
 
 INSERT INTO diagnose_medicine (diagnose, medicine)
@@ -173,19 +198,19 @@ WHERE NOT EXISTS (
 );
 
 INSERT INTO diagnose_medicine (diagnose, medicine)
-SELECT 'Akciğer enfeksiyonu veya Bronşit olabilir.', 'Amoksisilin-Klavulanat'
+SELECT 'Akciğer enfeksiyonu veya Bronşit olabilir.', 'Hafif olgularda semptomatik:Parasetamol,Ibuprofen\nBakteriyel olursa:Amoksisilin (antibiyotik)\nAmoksisilin + Klavulanik Asit,Azitromisin,Levofloksasin (ciddi vakalarda)'
 WHERE NOT EXISTS (
-    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Akciğer enfeksiyonu veya Bronşit olabilir.' AND medicine = 'Amoksisilin-Klavulanat'
+    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Akciğer enfeksiyonu veya Bronşit olabilir.' AND medicine = 'Hafif olgularda semptomatik:Parasetamol,Ibuprofen\nBakteriyel olursa:Amoksisilin (antibiyotik)\nAmoksisilin + Klavulanik Asit,Azitromisin,Levofloksasin (ciddi vakalarda)'
 );
 
 INSERT INTO diagnose_medicine (diagnose, medicine)
-SELECT 'Hafif Üst Solunum Yolu Enfeksiyonu.', 'Bol Sıvı ve Dinlenme'
+SELECT 'Hafif Üst Solunum Yolu Enfeksiyonu.', 'Genellikle semptomatik:Parasetamol,Ibuprofen'
 WHERE NOT EXISTS (
-    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Hafif Üst Solunum Yolu Enfeksiyonu.' AND medicine = 'Bol Sıvı ve Dinlenme'
+    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Hafif Üst Solunum Yolu Enfeksiyonu.' AND medicine = 'Genellikle semptomatik:Parasetamol,Ibuprofen'
 );
 
 INSERT INTO diagnose_medicine (diagnose, medicine)
-SELECT 'Sinüzit olabilir.', 'Nazal Dekonjestan ve Ağrı Kesici'
+SELECT 'Sinüzit olabilir.', 'Hafif vakalar:Parasetamol,Ibuprofen\nBakteriyel enfeksiyonsa:Amoksisilin'
 WHERE NOT EXISTS (
-    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Sinüzit olabilir.' AND medicine = 'Nazal Dekonjestan ve Ağrı Kesici'
+    SELECT 1 FROM diagnose_medicine WHERE diagnose = 'Sinüzit olabilir.' AND medicine = 'Hafif vakalar:Parasetamol,Ibuprofen\nBakteriyel enfeksiyonsa:Amoksisilin'
 );

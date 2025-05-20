@@ -40,7 +40,7 @@ class AdminPanelScene(QWidget):
         layout.addWidget(self.tabs)
         self.setLayout(layout)
 
-    # paneldeki tabloyu güncelleyen fonksiyon
+    # paneldeki tabloyu oluşturan fonksiyon
     def create_oran_tab(self):
         tab = QWidget()
         layout = QVBoxLayout()
@@ -66,6 +66,21 @@ class AdminPanelScene(QWidget):
         tab.setLayout(layout)
         return tab
 
+    # paneldeki tabloyu güncelleyen fonksiyon
+    def update_oran_tab(self):
+        # veritabanından veriyi al
+        stats = pnl.get_doctor_review_stats()
+        self.table.setRowCount(len(stats)) # gelen verilerin uzunluğu kadar satır olacak
+        # her veri için şu işlemleri yap
+        for row, (name, total, iyilesen, iyilesmeyen) in enumerate(stats):
+            formatted_name = f"Dr. {name.title()}" # ismi düzenliyoruz
+            print(f"{formatted_name} degerlendirmeler = {total}")
+            self.table.setItem(row, 0, QTableWidgetItem(formatted_name)) # 0. index name sütunu
+            self.table.setItem(row, 1, QTableWidgetItem(str(iyilesen))) # 1. index iylesen sütunu
+            self.table.setItem(row, 2, QTableWidgetItem(str(iyilesmeyen))) # 2. index iyilesmeyen sütunu
+            self.table.setItem(row, 3, QTableWidgetItem(str(total))) # 3. index total sütunu
+
+    # paneldeki grafiği olşturan fonksiyon
     def create_grafik_tab(self):
         tab = QWidget()
         layout = QVBoxLayout()
@@ -74,6 +89,12 @@ class AdminPanelScene(QWidget):
         doctor_ratings = pnl.get_all_doctor_ratings()
         doctor_names = [f"Dr. {row[0].title()}" for row in doctor_ratings]
         ratings = [row[1] for row in doctor_ratings]
+        
+        # burayı sonra sil
+        count=0
+        while(count < len(doctor_names)):
+            print(f"{doctor_ratings[count]}")
+            count+=1
 
         fig, ax = plt.subplots()
         ax.bar(doctor_names, ratings, color='skyblue')
@@ -83,6 +104,7 @@ class AdminPanelScene(QWidget):
         ax.set_ylim(0, 5.1)
         ax.axhline(y=sum(ratings)/len(ratings), color='red', linestyle='--', label='Ortalama')
         ax.legend()
+        plt.xticks(rotation=45, ha="right")  
         fig.tight_layout()
 
         canvas = FigureCanvas(fig)
